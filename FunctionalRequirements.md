@@ -6,6 +6,7 @@ Functional requirements specification for a database system designed to help in 
 
 ## Business processes
 
+
 ---
 <a id="bc1"></a>
 ### BC1: Sprzedaż aukcyjna 
@@ -43,109 +44,55 @@ A person that manages the system.
 ### Actors and their goals
 
 [Administrator](#ac1):
-* [UC1](#uc1): Wystawienie produktu na aukcję
+* [UC1](#uc1): Adding an employee
+* [UC2](#uc2): Adding an order
+* [UC3](#uc3): Finishing an order
+* [UC4](#uc4): Submitting material delivery info
+* [UC5](#uc5): Adding a contractor
+* [UC6](#uc6): Adding new product
+* [UC7](#uc7): Reporting employee attendance
 
 ---
 <a id="uc1"></a>
-### UC1: Wystawienie produktu na aukcję
+### UC1: Adding an employee
 
-**Aktorzy:** [Sprzedający](#ac1)
+**Aktorzy:** [Administrator](#ac1)
 
-**Scenariusz główny:**
-1. [Sprzedający](#ac1) zgłasza do systemu chęć wystawienia produktu na aukcję.
-2. System prosi o podanie danych produktu i ceny wywoławczej.
-3. [Sprzedający](#ac1) podaje dane produktu oraz cenę wywoławczą.
-4. System weryfikuje poprawność danych.
-5. System informuje o pomyślnym wystawieniu produktu na aukcję.
+**Main scenario:**
+1. [Administrator](#ac1) requests adding an employee to the database
+2. System asks for information about the employee
+3. [Administrator](#ac1) submits informations
+4. System verifies if given informations are correct
+5. System informs about succesfully adding an employee
 
-**Scenariusze alternatywne:** 
+**Alternative scenarios:** 
 
-4.A. Podano niepoprawne lub niekompletne dane produktu.
-* 4.A.1. System informuje o błędnie podanych danych.
-* 4.A.2. Przejdź do kroku 2.
-
----
-
-<a id="uc2"></a>
-### UC2: Przebicie aktualnej oferty
-
-**Aktorzy:** [Kupujący](#ac2)
-
-**Scenariusz główny:**
-1. [Kupujący](#ac2) sprawdza cenę i parametry produktu
-2. [Kupujący](#ac2) wyraża chęć przebicia aktualnej ceny produktu
-3. System prosi [Kupującego](#ac2) o podanie kwoty jaką oferuje za produkt
-4. System weryfikuje podaną kwotę
-
-**Scenariusze alternatywne:** 
-
-4.A. Podano niepoprawną kwotę.
-* 4.A.1. System informuje o błędnie podanej kwocie.
-* 4.A.2. Przejdź do kroku 3.
----
-
-<a id="uc3"></a>
-### UC3: Wygranie aukcji
-
-**Aktorzy:** [Kupujący](#ac2), [Sprzedający](#ac1)
-
-**Scenariusz główny:**
-1. Mija czas pozostały na podbicie oferty za produkt.
-2. System informuje [Sprzedającego](#ac1) i [Kupującego](#ac2) o wyniku aukcji.
-3. System przydziela [Kupującemu](#ac2) i [Sprzedającemu](#ac1) wierzyciela który zaautoryzuje przekazanie pieniedzy i produktu
----
-
-<a id="uc4"></a>
-### UC4: Przeprowadzenie transakcji
-
-**Aktorzy:** [Kupujący](#ac2), [Sprzedający](#ac1), [Wierzyciel](#ac3)
+4.A. Given informations are incorrect
+* 4.A.1. System alerts that informations are incorrect.
+* 4.A.2. Go to step 2.
 
 
-**Scenariusz główny:**
-1. [Kupujący](#ac2) przekazuje kwotę, którą zadeklarował się zapłacić [Wierzycielowi](#ac3)
-2. [Wierzyciel](#ac3) weryfikuje kwotę jaką przekazał [Kupujący](#ac2)
-3. [Sprzedający](#ac1) przekazuje produkt [Wierzycielowi](#ac3) 
-4. [Wierzyciel](#ac3) weryfikuje zgodnosć produktu przekazanego z produktem zaprezentowanym na aukcji.
-5. [Wierzyciel](#ac3) przekazuje [Sprzedającemu](#ac1) zadeklarowaną kwotę, a [Kupującemu](#ac2) produkt z aukcji.
 
-**Scenariusze alternatywne:** 
+## Business Objects
 
-2.A. Przekazana kwota nie zgadza się z zadeklarowaną na aukcji
-* 2.A.1. [Wierzyciel](#ac3) informuje o niezgodności kwoty
-* 2.A.2. Jeśli [Kupujący](#ac2) zgadza się na przekazanie poprawnej kwoty wracamy do kroku 1, jeśli nie to transakcja jest anulowana.
+### BO1: Order
+An order is a transaction between the factory and contractor to exchange products for money or money for materials
 
-4.A. Przekazany produkt nie zgadza się z zadeklarowanym na aukcji
-* 4.A.1. [Wierzyciel](#ac3) informuje o niezgodności towaru
-* 4.A.2. Jeśli [Sprzedający](#ac1) zgadza się na przekazanie poprawnego produktu wracamy do kroku 1, jeśli nie to transakcja jest anulowana.
----
+### BO2: Employee
+A person working in the factory
 
-## Obiekty biznesowe (inaczej obiekty dziedzinowe lub informacyjne)
-
-### BO1: Aukcja
-
-Aukcja jest formą zawierania transakcji kupna-sprzedaży, w której Sprzedający określa cenę wywoławczą produktu, natomiast Kupujący mogą oferować własną ofertę zakupu każdorazowo proponując kwotę wyższą od aktualnie oferowanej kwoty. Aukcja kończy się po upływie określonego czasu. Jeśli złożona została co najmniej jedna oferta zakupy produkt nabywa ten Kupujący, który zaproponował najwyższą kwotę. 
-
-### BO2: Produkt
-
-Fizyczny lub cyfrowy obiekt, który ma zostać sprzedany w ramach aukcji.
-
-### BO3: Kwota
-
-Ilość pieniędzy, która ma zostać przekazana
-
-
-## Reguły biznesowe
+## Business rules
 
 <a id="br1"></a>
-### BR1: Złożenie oferty
+### BR1: Recieving buy order
 
-Złożenie oferty wymaga zaproponowania kwoty wyższej niż aktualnie oferowana o minimum 1,00 PLN.
+Recieving an buy order is an agreement to fulfill an order for the factory's products.
 
 
 <a id="br2"></a>
-### BR2: Rozstrzygnięcie aukcji
+### BR2: Sending buy order
 
-Aukcję wygrywa ten z [Kupujący](#ac2)ch, który w momencie jej zakończenia (upłynięcia czasu) złożył najwyższą ofertę.
+Sending buy offer is an agreement to exchange money for materials.
 
 ## Macierz CRUDL
 
