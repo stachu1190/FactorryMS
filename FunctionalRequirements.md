@@ -71,6 +71,102 @@ A person that manages the system.
 * 4.A.1. System alerts that informations are incorrect.
 * 4.A.2. Go to step 2.
 
+---
+<a id="uc2"></a>
+### UC2: Adding an order
+
+**Users:** [Administrator](#ac1)
+
+**Main scenario:**
+1. Admin requests adding an order to the database.
+2. System asks for information about the order.
+3. Admin submits information.
+4. System verifies information.
+5. System informs about a succesful update.
+
+**Alternative scenarios:**
+4.A Submited information are incorrect
+* 4.A.1 System alerts that the information are incorrect
+* 4.A.2 Go to step 2
+---
+<a id="uc3"></a>
+### UC3: Finishing an order
+
+**Users:** [Administrator](#ac1)
+
+**Main scenario:**
+1. Admin submits a request to finish an order
+2. System asks for confirmation
+3. System deletes the order
+
+---
+
+<a id="uc4"></a>
+### UC4: Submitting material delivery info
+
+**Users:** [Administrator](#ac1)
+
+**Main scenario:** 
+
+**Alternative scenarios:**
+
+---
+
+<a id="uc5"></a>
+### UC5: Adding a contractor
+
+**Users:** [Administrator](#ac1)
+
+**Main scenario:**
+1. Admin submits a request to add a contractor to the database
+2. System asks information about the contractor
+3. Admin inputs information
+4. System verifies the information
+5. System informs about a successful update.
+
+**Alternative scenarios:**
+4.A Submited information are incorrect
+* 4.A.1 System alerts that the information are incorrect
+* 4.A.1 Go to step 2
+
+---
+
+<a id="uc6"></a>
+### UC6: Adding a product
+
+**Users:** [Administrator](#ac1)
+
+**Main scenario:**
+1. Admin submits a request to add a product to the database
+2. System asks information about the product
+3. Admin inputs information
+4. System verifies the information
+5. System informs about a successful update.
+
+**Alternative scenarios:**
+4.A Submited information are incorrect
+* 4.A.1 System alerts that the information are incorrect
+* 4.A.1 Go to step 2
+
+---
+<a id="uc7"></a>
+### UC7: Reporting employee attendance
+
+**Users:** [Administrator](#ac1)
+
+**Main scenario:**
+1. Admin submits a request to report employee attendance
+2. System asks about the date and time of attendance
+3. Admin chooses the data from a special tab
+4. System ensures that the date and time is correct
+5. System submits the attendance
+
+**Alternative scenarios:**
+4.A Submited date and time are incorrect
+* 4.A.1 System alerts that the information are incorrect
+* 4.A.1 Go to step 2
+---
+
 
 
 ## Business Objects
