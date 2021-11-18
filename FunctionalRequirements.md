@@ -3,7 +3,7 @@
 ## Introduction
 
 Functional requirements specification for a database system designed to help in factory management.
-<!--->
+<!---
 ## Business processes
 
 
@@ -31,7 +31,7 @@ Functional requirements specification for a database system designed to help in 
 * 3.A.1. Koniec przypadku użycia.
 
 ---
-<--->
+--->
 ## Actors
 
 <a id="ac1"></a>
