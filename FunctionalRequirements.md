@@ -3,7 +3,7 @@
 ## Introduction
 
 Functional requirements specification for a database system designed to help in factory management.
-
+<!--->
 ## Business processes
 
 
@@ -31,7 +31,7 @@ Functional requirements specification for a database system designed to help in 
 * 3.A.1. Koniec przypadku użycia.
 
 ---
-
+<--->
 ## Actors
 
 <a id="ac1"></a>
@@ -56,7 +56,7 @@ A person that manages the system.
 <a id="uc1"></a>
 ### UC1: Adding an employee
 
-**Aktorzy:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
 **Main scenario:**
 1. [Administrator](#ac1) requests adding an employee to the database
@@ -75,7 +75,7 @@ A person that manages the system.
 <a id="uc2"></a>
 ### UC2: Adding an order
 
-**Users:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
 **Main scenario:**
 1. Admin requests adding an order to the database.
@@ -92,7 +92,7 @@ A person that manages the system.
 <a id="uc3"></a>
 ### UC3: Finishing an order
 
-**Users:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
 **Main scenario:**
 1. Admin submits a request to finish an order
@@ -104,18 +104,25 @@ A person that manages the system.
 <a id="uc4"></a>
 ### UC4: Submitting material delivery info
 
-**Users:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
-**Main scenario:** 
+**Main scenario:**
+1. Admin submits a request to update delivery info
+2. System asks for information/details about the delivery
+3. Admin submits the information
+4. System verifies delivery information
+5. System informs about a succesful update 
 
 **Alternative scenarios:**
-
+4.A Submited information are incorrect
+* 4.A.1 System alerts that the information are incorrect
+* 4.A.2 Go to step 2
 ---
 
 <a id="uc5"></a>
 ### UC5: Adding a contractor
 
-**Users:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
 **Main scenario:**
 1. Admin submits a request to add a contractor to the database
@@ -134,7 +141,7 @@ A person that manages the system.
 <a id="uc6"></a>
 ### UC6: Adding a product
 
-**Users:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
 **Main scenario:**
 1. Admin submits a request to add a product to the database
@@ -152,7 +159,7 @@ A person that manages the system.
 <a id="uc7"></a>
 ### UC7: Reporting employee attendance
 
-**Users:** [Administrator](#ac1)
+**Actors:** [Administrator](#ac1)
 
 **Main scenario:**
 1. Admin submits a request to report employee attendance
