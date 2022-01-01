@@ -2,6 +2,16 @@ from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 import psycopg2
 from psycopg2 import Error
+import signal
+
+def shutdown(signal_received, frame):
+    cursor.close()
+    connection.close()
+    print("REST api has been shut down")
+    exit(0)
+
+signal.signal(signal.SIGTERM, shutdown)
+signal.signal(signal.SIGINT, shutdown)
 
 app = Flask(__name__)
 api = Api(app)
@@ -17,11 +27,6 @@ try:
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)
-finally:
-    if connection:
-        cursor.close()
-        connection.close()
-        print("PostgreSQL connection is closed")
 
 
 if __name__ == "__main__":
