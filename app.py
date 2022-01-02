@@ -3,6 +3,9 @@ from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 import psycopg2
 from psycopg2 import Error
 import signal
+import parsers
+import sys
+from queries import employee_query
 
 def shutdown(signal_received, frame):
     cursor.close()
@@ -28,6 +31,16 @@ try:
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)
 
+class Employee(Resource):
+    def post(self):
+        parser = parsers.employee_parser()
+        args = parser.parse_args()
+        query = employee_query(args)
+        cursor.execute(query)
+        connection.commit()
+        
+
+api.add_resource(Employee, "/employee")
 
 if __name__ == "__main__":
 	app.run(debug=True)
