@@ -1,16 +1,43 @@
 from flask import Flask
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+from flask_restful import Api, Resource, reqparse, abort
 import psycopg2
+import psycopg2.extras
 from psycopg2 import Error
 import signal
-import parsers
+import insert_parsers
+import find_parsers
 import sys
 import queries
 import datetime
 
 def date_splitter(s):
     tab = s.split('-')
-    return datetime.datetime(int(tab[0]), int(tab[1]), int(tab[2]))   
+    return datetime.date(int(tab[0]), int(tab[1]), int(tab[2]))   
+def select(args, table):
+    if(any(args.values()) == False):
+        query = "SELECT * FROM " + table
+    else:
+        query = "SELECT * FROM " + table +" WHERE "
+        first = True
+        for key in args.keys():
+            if args[key] != None:
+                if first == False:
+                    query = query + " AND "
+                if "date" in key.split("_"):
+                    query = query + key + "= DATE '" + str(args[key]) + "'"
+                elif isinstance(args[key], int) or isinstance(args[key], float):
+                    query = query + key + "=" + str(args[key])
+                else:
+                    query = query + key + " LIKE '%" + str(args[key]) + "%'"
+                first = False
+    cursor_select.execute(query)
+    response = cursor_select.fetchall()
+    for i in range(len(response)):
+        for key in response[i].keys():
+            if(isinstance(response[i][key], datetime.date)):
+                response[i][key] = "{year}-{month}-{day}".format(year = response[i][key].year, month = response[i][key].month, day = response[i][key].day)
+    return response
+
 
 def shutdown(signal_received, frame):
     cursor.close()
@@ -33,6 +60,7 @@ try:
                                   database="coffin_factory")
 
     cursor = connection.cursor()
+    cursor_select = connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)
@@ -49,22 +77,30 @@ def print_psycopg2_exception(err):
 
 class Employee(Resource):
     def post(self):
-        parser = parsers.employee_parser()
+        parser = insert_parsers.employee_parser()
         args = parser.parse_args()
         query = queries.employee_query(args)
         cursor.execute(query)
         connection.commit()
         return {}, 201
+    def get(self):
+        parser = find_parsers.employee_parser()
+        args = parser.parse_args()
+        response = select(args, "employee")
+        connection.commit()
+        return response, 200
+
 class Attendance(Resource):
     def post(self):
-        parser = parsers.attendance_parser()
+        parser = insert_parsers.attendance_parser()
         args = parser.parse_args()
         query = queries.attendance_query(args)
-        cursor.execute("SELECT id_employee FROM employee WHERE id_employee = {id_employee}".format(id_employee = args['id_employee']))
-        if(cursor.fetchall() == []):
+        cursor.execute("SELECT id_employee, date_employed FROM employee WHERE id_employee = {id_employee}".format(id_employee = args['id_employee']))
+        response = cursor.fetchall()
+        if(response == []):
             return {'error' : 'There is no employee with given id'},404
         else:
-            date_emp = cursor.fetchall()[0][0]
+            date_emp = response[0][1]
             date_att = date_splitter(args['attendance_date'])
             if(date_emp > date_att):
                 return {"error" : "date employed can't be further than attendance date"}, 409
@@ -79,25 +115,43 @@ class Attendance(Resource):
                 else:
                     return {"error" : error, "code" : code}, 400
             return {}, 201
+    def get(self):
+         parser = find_parsers.employee_parser()
+         args = parser.parse_args()
+         response = select(args, "attendance")
+         connection.commit()
+         return response, 200
 class Contractor(Resource):
     def post(self):
-        parser = parsers.contractor_parser()
+        parser = insert_parsers.contractor_parser()
         args = parser.parse_args()
         query = queries.contractor_query(args)
         cursor.execute(query)
         connection.commit()
         return {}, 201
+    def get(self):
+         parser = find_parsers.contractor_parser()
+         args = parser.parse_args()
+         response = select(args, "contractor")
+         connection.commit()
+         return response, 200
 class Supplier(Resource):
     def post(self):
-        parser = parsers.supplier_parser()
+        parser = insert_parsers.supplier_parser()
         args = parser.parse_args()
         query = queries.supplier_query(args)
         cursor.execute(query)
         connection.commit()
         return {}, 201
+    def get(self):
+         parser = find_parsers.supplier_parser()
+         args = parser.parse_args()
+         response = select(args, "supplier")
+         connection.commit()
+         return response, 200
 class Model(Resource):
     def post(self):
-        parser = parsers.model_parser()
+        parser = insert_parsers.model_parser()
         args = parser.parse_args()
         if(args['available'] != "Y" and args['available'] != "N"):
             return {"error" : "available parameter can only have value Y if product is available and N if not"},400
@@ -109,9 +163,15 @@ class Model(Resource):
             cursor.execute(query)
             connection.commit()
             return {}, 201
+    def get(self):
+         parser = find_parsers.model_parser()
+         args = parser.parse_args()
+         response = select(args, "model")
+         connection.commit()
+         return response, 200
 class Material(Resource):
     def post(self):
-        parser = parsers.material_parser()
+        parser = insert_parsers.material_parser()
         args = parser.parse_args()
         query = queries.material_query(args)
         try:
@@ -125,9 +185,15 @@ class Material(Resource):
             else:
                 return {"error" : error, "code" : code}, 400
         return {}, 201
+    def get(self):
+         parser = find_parsers.material_parser()
+         args = parser.parse_args()
+         response = select(args, "material")
+         connection.commit()
+         return response, 200
 class Delivery(Resource):
     def post(self):
-        parser = parsers.delivery_parser()
+        parser = insert_parsers.delivery_parser()
         args = parser.parse_args()
         query = queries.delivery_query(args)
         cursor.execute("SELECT id_employee FROM employee join attendance using(id_employee) WHERE id_employee = {id_employee} AND attendance_date = '{attendance_date}'".format(id_employee = args['id_employee'], attendance_date = args['date_delivery']))
@@ -146,9 +212,15 @@ class Delivery(Resource):
             cursor.execute(query)
             connection.commit()
             return {}, 201
+    def get(self):
+         parser = find_parsers.delivery_parser()
+         args = parser.parse_args()
+         response = select(args, "delivery")
+         connection.commit()
+         return response, 200
 class Order_component(Resource):
     def post(self):
-        parser = parsers.order_component_parser()
+        parser = insert_parsers.order_component_parser()
         args = parser.parse_args()
         query = queries.order_component_query(args)
         cursor.execute("SELECT id_order FROM orders WHERE id_order = {id_order}".format(id_order = args['id_order']))
@@ -171,9 +243,15 @@ class Order_component(Resource):
                 else:
                     return {"error" : error, "code" : code}, 400
             return {}, 201
+    def get(self):
+         parser = find_parsers.order_component_parser()
+         args = parser.parse_args()
+         response = select(args, "order_component")
+         connection.commit()
+         return response, 200
 class Stock(Resource):
     def post(self):
-        parser = parsers.stock_parser()
+        parser = insert_parsers.stock_parser()
         args = parser.parse_args()
         query = queries.stock_query(args)
         cursor.execute("SELECT name_material FROM material WHERE name_material = '{name_material}'".format(name_material = args['name_material']))
@@ -196,9 +274,15 @@ class Stock(Resource):
                 else:
                     return {"error" : error, "code" : code}, 400
              return {}, 201
+    def get(self):
+         parser = find_parsers.stock_parser()
+         args = parser.parse_args()
+         response = select(args, "stock")
+         connection.commit()
+         return response, 200
 class Orders(Resource):
     def post(self):
-        parser = parsers.orders_parser()
+        parser = insert_parsers.orders_parser()
         args = parser.parse_args()
         query = queries.orders_query(args)
         cursor.execute("SELECT id_contractor FROM contractor WHERE id_contractor = {id_contractor}".format(id_contractor = args['id_contractor']))
@@ -213,6 +297,12 @@ class Orders(Resource):
             cursor.execute(query)
             connection.commit()
             return {}, 201
+    def get(self):
+         parser = find_parsers.orders_parser()
+         args = parser.parse_args()
+         response = select(args, "orders")
+         connection.commit()
+         return response, 200
 
 api.add_resource(Employee, "/employee")
 api.add_resource(Attendance, "/attendance")

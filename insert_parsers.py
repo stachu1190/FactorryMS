@@ -81,6 +81,10 @@ def stock_parser():
     parser.add_argument("name_material", type=str, help="Name of the material", required=True)
     parser.add_argument("id_delivery", type=int, help="ID of the delivery in which the stock was registered", required=True)
     return parser
+def phrase_parser():
+    parser = reqparse.RequestParser()
+    parser.add_argument("phrase", type=string, help="Phrase using which you want to select", required=True)
+    return parser
 
 
 
