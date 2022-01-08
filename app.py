@@ -32,12 +32,42 @@ def select(args, table):
                 first = False
     cursor_select.execute(query)
     response = cursor_select.fetchall()
+    if response == []:
+        return response, 404
     for i in range(len(response)):
         for key in response[i].keys():
             if(isinstance(response[i][key], datetime.date)):
                 response[i][key] = "{year}-{month}-{day}".format(year = response[i][key].year, month = response[i][key].month, day = response[i][key].day)
-    return response
+    return response, 200
 
+def delete(args, table):
+    if(any(args.values()) == False):
+        return 400
+    selected, code = select(args, table)
+    if code == 404:
+        return 404
+    query = "DELETE FROM " + table + " WHERE " 
+    first = True
+    print("seiam eniu")
+    for key in args.keys():
+            if args[key] != None:
+                if first == False:
+                    query = query + " AND "
+                if "date" in key.split("_"):
+                    query = query + key + "= DATE '" + str(args[key]) + "'"
+                elif isinstance(args[key], int) or isinstance(args[key], float):
+                    query = query + key + "=" + str(args[key])
+                else:
+                    query = query + key + " LIKE '%" + str(args[key]) + "%'"
+                first = False
+    print(query)
+    try:
+        cursor.execute(query)
+        return 200
+    except (Exception, Error) as error:
+        connection.rollback()
+        code, error = print_psycopg2_exception(err)
+        return 404
 
 def shutdown(signal_received, frame):
     cursor.close()
@@ -86,9 +116,15 @@ class Employee(Resource):
     def get(self):
         parser = find_parsers.employee_parser()
         args = parser.parse_args()
-        response = select(args, "employee")
+        response, code = select(args, "employee")
         connection.commit()
-        return response, 200
+        return response, code
+    def delete(self):
+        parser = find_parsers.employee_parser()
+        args = parser.parse_args()
+        code = delete(args, "employee")
+        connection.commit()
+        return {}, code
 
 class Attendance(Resource):
     def post(self):
@@ -116,11 +152,17 @@ class Attendance(Resource):
                     return {"error" : error, "code" : code}, 400
             return {}, 201
     def get(self):
-         parser = find_parsers.employee_parser()
+         parser = find_parsers.attendance_parser()
          args = parser.parse_args()
-         response = select(args, "attendance")
+         response, code = select(args, "attendance")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.attendance_parser()
+        args = parser.parse_args()
+        code = delete(args, "attendance")
+        connection.commit()
+        return {}, code
 class Contractor(Resource):
     def post(self):
         parser = insert_parsers.contractor_parser()
@@ -132,9 +174,15 @@ class Contractor(Resource):
     def get(self):
          parser = find_parsers.contractor_parser()
          args = parser.parse_args()
-         response = select(args, "contractor")
+         response, code = select(args, "contractor")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.contractor_parser()
+        args = parser.parse_args()
+        code = delete(args, "contractor")
+        connection.commit()
+        return {}, code
 class Supplier(Resource):
     def post(self):
         parser = insert_parsers.supplier_parser()
@@ -146,9 +194,15 @@ class Supplier(Resource):
     def get(self):
          parser = find_parsers.supplier_parser()
          args = parser.parse_args()
-         response = select(args, "supplier")
+         response, code = select(args, "supplier")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.supplier_parser()
+        args = parser.parse_args()
+        code = delete(args, "supplier")
+        connection.commit()
+        return {}, code
 class Model(Resource):
     def post(self):
         parser = insert_parsers.model_parser()
@@ -166,9 +220,15 @@ class Model(Resource):
     def get(self):
          parser = find_parsers.model_parser()
          args = parser.parse_args()
-         response = select(args, "model")
+         response, code = select(args, "model")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.model_parser()
+        args = parser.parse_args()
+        code = delete(args, "model")
+        connection.commit()
+        return {}, code
 class Material(Resource):
     def post(self):
         parser = insert_parsers.material_parser()
@@ -188,9 +248,16 @@ class Material(Resource):
     def get(self):
          parser = find_parsers.material_parser()
          args = parser.parse_args()
-         response = select(args, "material")
+         response, code = select(args, "material")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.material_parser()
+        args = parser.parse_args()
+        code = delete(args, "material")
+        connection.commit()
+        return {}, code
+    
 class Delivery(Resource):
     def post(self):
         parser = insert_parsers.delivery_parser()
@@ -215,9 +282,15 @@ class Delivery(Resource):
     def get(self):
          parser = find_parsers.delivery_parser()
          args = parser.parse_args()
-         response = select(args, "delivery")
+         response, code = select(args, "delivery")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.delivery_parser()
+        args = parser.parse_args()
+        code = delete(args, "delivery")
+        connection.commit()
+        return {}, code
 class Order_component(Resource):
     def post(self):
         parser = insert_parsers.order_component_parser()
@@ -246,9 +319,15 @@ class Order_component(Resource):
     def get(self):
          parser = find_parsers.order_component_parser()
          args = parser.parse_args()
-         response = select(args, "order_component")
+         response, code = select(args, "order_component")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.order_component_parser()
+        args = parser.parse_args()
+        code = delete(args, "order_component")
+        connection.commit()
+        return {}, code    
 class Stock(Resource):
     def post(self):
         parser = insert_parsers.stock_parser()
@@ -277,9 +356,15 @@ class Stock(Resource):
     def get(self):
          parser = find_parsers.stock_parser()
          args = parser.parse_args()
-         response = select(args, "stock")
+         response, code = select(args, "stock")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.stock_parser()
+        args = parser.parse_args()
+        code = delete(args, "stock")
+        connection.commit()
+        return {}, code
 class Orders(Resource):
     def post(self):
         parser = insert_parsers.orders_parser()
@@ -300,9 +385,15 @@ class Orders(Resource):
     def get(self):
          parser = find_parsers.orders_parser()
          args = parser.parse_args()
-         response = select(args, "orders")
+         response, code = select(args, "orders")
          connection.commit()
-         return response, 200
+         return response, code
+    def delete(self):
+        parser = find_parsers.orders_parser()
+        args = parser.parse_args()
+        code = delete(args, "orders")
+        connection.commit()
+        return {}, code
 
 api.add_resource(Employee, "/employee")
 api.add_resource(Attendance, "/attendance")
