@@ -6,6 +6,7 @@ from psycopg2 import Error
 import signal
 import insert_parsers
 import find_parsers
+import update_parsers
 import sys
 import queries
 import datetime
@@ -25,7 +26,9 @@ def select(args, table):
                     query = query + " AND "
                 if "date" in key.split("_"):
                     query = query + key + "= DATE '" + str(args[key]) + "'"
-                elif isinstance(args[key], int) or isinstance(args[key], float):
+                elif "id" in key.split("_"):
+                    query = query + key + "=" + str(args[key])
+                elif isinstance(args[key], int) or isinstance(args[key], float) :
                     query = query + key + "=" + str(args[key])
                 else:
                     query = query + key + " LIKE '%" + str(args[key]) + "%'"
@@ -48,19 +51,19 @@ def delete(args, table):
         return 404
     query = "DELETE FROM " + table + " WHERE " 
     first = True
-    print("seiam eniu")
     for key in args.keys():
             if args[key] != None:
                 if first == False:
                     query = query + " AND "
                 if "date" in key.split("_"):
                     query = query + key + "= DATE '" + str(args[key]) + "'"
+                elif "id" in key.split("_"):
+                    query = query + key + "=" + str(args[key])
                 elif isinstance(args[key], int) or isinstance(args[key], float):
                     query = query + key + "=" + str(args[key])
                 else:
                     query = query + key + " LIKE '%" + str(args[key]) + "%'"
                 first = False
-    print(query)
     try:
         cursor.execute(query)
         return 200
@@ -68,6 +71,62 @@ def delete(args, table):
         connection.rollback()
         code, error = print_psycopg2_exception(err)
         return 404
+
+def update(args, table):
+    args_sel = {}
+    args_upd = {}
+    for key in args.keys():
+        if(args[key] != None):
+            if(key[:3] == "mod"):
+                args_upd[key] = args[key]
+            else:
+                args_sel[key] = args[key] 
+    query = "UPDATE " + table
+    if(any(args_upd.values()) == False):
+        return 400
+    else:
+        query  = query + " SET "
+        first = True
+        for key in args_upd.keys():
+            if(key[:3] == "mod"):
+                if args[key] != None:
+                    key_query = key[4:]
+                    if first == False:
+                        query = query + ", "
+                    if "date" in key.split("_"):
+                        query = query + key_query + "= DATE '" + str(args[key]) + "'"
+                    elif "id" in key.split("_"):
+                        query = query + key_query + "=" + str(args[key])
+                    elif isinstance(args[key], int) or isinstance(args[key], float):
+                        query = query + key_query + "=" + str(args[key])
+                    else:
+                        query = query + key_query + "='" + str(args[key]) + "'"
+                    first = False
+    if(any(args_sel.values()) != False):
+        query  = query + " WHERE "
+        first = True
+        for key in args.keys():
+            if(key[:3] != "mod"):
+                if args[key] != None:
+                    if first == False:
+                        query = query + " AND "
+                    if "date" in key.split("_"):
+                        query = query + key + "= DATE '" + str(args[key]) + "'"
+                    elif "id" in key.split("_"):
+                        query = query + key + "=" + str(args[key])
+                    elif isinstance(args[key], int) or isinstance(args[key], float):
+                        query = query + key + "=" + str(args[key])
+                    else:
+                        query = query + key + " LIKE '%" + str(args[key]) + "%'"
+                    first = False
+    try:
+        cursor.execute(query)
+        return 200
+    except (Exception, Error) as error:
+        connection.rollback()
+        code, error = print_psycopg2_exception(err)
+        return 404      
+
 
 def shutdown(signal_received, frame):
     cursor.close()
@@ -125,6 +184,12 @@ class Employee(Resource):
         code = delete(args, "employee")
         connection.commit()
         return {}, code
+    def put(self):
+        parser = update_parsers.employee_parser()
+        args = parser.parse_args()
+        code = update(args, "employee")
+        connection.commit()
+        return {}, code
 
 class Attendance(Resource):
     def post(self):
@@ -163,6 +228,12 @@ class Attendance(Resource):
         code = delete(args, "attendance")
         connection.commit()
         return {}, code
+    def put(self):
+        parser = update_parsers.attendance_parser()
+        args = parser.parse_args()
+        code = update(args, "attendance")
+        connection.commit()
+        return {}, code
 class Contractor(Resource):
     def post(self):
         parser = insert_parsers.contractor_parser()
@@ -183,6 +254,12 @@ class Contractor(Resource):
         code = delete(args, "contractor")
         connection.commit()
         return {}, code
+    def put(self):
+        parser = update_parsers.contractor_parser()
+        args = parser.parse_args()
+        code = update(args, "contractor")
+        connection.commit()
+        return {}, code
 class Supplier(Resource):
     def post(self):
         parser = insert_parsers.supplier_parser()
@@ -201,6 +278,12 @@ class Supplier(Resource):
         parser = find_parsers.supplier_parser()
         args = parser.parse_args()
         code = delete(args, "supplier")
+        connection.commit()
+        return {}, code
+    def put(self):
+        parser = update_parsers.supplier_parser()
+        args = parser.parse_args()
+        code = update(args, "supplier")
         connection.commit()
         return {}, code
 class Model(Resource):
@@ -229,6 +312,12 @@ class Model(Resource):
         code = delete(args, "model")
         connection.commit()
         return {}, code
+    def put(self):
+        parser = update_parsers.model_parser()
+        args = parser.parse_args()
+        code = update(args, "model")
+        connection.commit()
+        return {}, code
 class Material(Resource):
     def post(self):
         parser = insert_parsers.material_parser()
@@ -255,6 +344,12 @@ class Material(Resource):
         parser = find_parsers.material_parser()
         args = parser.parse_args()
         code = delete(args, "material")
+        connection.commit()
+        return {}, code
+    def put(self):
+        parser = update_parsers.material_parser()
+        args = parser.parse_args()
+        code = update(args, "material")
         connection.commit()
         return {}, code
     
@@ -289,6 +384,12 @@ class Delivery(Resource):
         parser = find_parsers.delivery_parser()
         args = parser.parse_args()
         code = delete(args, "delivery")
+        connection.commit()
+        return {}, code
+    def put(self):
+        parser = update_parsers.delivery_parser()
+        args = parser.parse_args()
+        code = update(args, "delivery")
         connection.commit()
         return {}, code
 class Order_component(Resource):
@@ -328,6 +429,12 @@ class Order_component(Resource):
         code = delete(args, "order_component")
         connection.commit()
         return {}, code    
+    def put(self):
+        parser = update_parsers.order_component_parser()
+        args = parser.parse_args()
+        code = update(args, "order_component")
+        connection.commit()
+        return {}, code
 class Stock(Resource):
     def post(self):
         parser = insert_parsers.stock_parser()
@@ -365,6 +472,12 @@ class Stock(Resource):
         code = delete(args, "stock")
         connection.commit()
         return {}, code
+    def put(self):
+        parser = update_parsers.stock_parser()
+        args = parser.parse_args()
+        code = update(args, "stock")
+        connection.commit()
+        return {}, code
 class Orders(Resource):
     def post(self):
         parser = insert_parsers.orders_parser()
@@ -392,6 +505,12 @@ class Orders(Resource):
         parser = find_parsers.orders_parser()
         args = parser.parse_args()
         code = delete(args, "orders")
+        connection.commit()
+        return {}, code
+    def put(self):
+        parser = update_parsers.orders_parser()
+        args = parser.parse_args()
+        code = update(args, "orders")
         connection.commit()
         return {}, code
 
