@@ -1,0 +1,1805 @@
+{
+	"info": {
+		"_postman_id": "a7e17fdc-ba5a-4e52-a032-db167af9e6c8",
+		"name": "coffin_factory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "insert",
+			"item": [
+				{
+					"name": "employee-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/employee?first_name=Stanisław&last_name=Zieliński&PESEL=11223344550&date_employed=2021-09-10&salary=100000.0&city=Skwierzyna&street=Konopnicka&postal_code=66-440&country=Polska&house_number=4",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"employee"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Stanisław"
+								},
+								{
+									"key": "last_name",
+									"value": "Zieliński"
+								},
+								{
+									"key": "PESEL",
+									"value": "11223344550"
+								},
+								{
+									"key": "date_employed",
+									"value": "2021-09-10"
+								},
+								{
+									"key": "salary",
+									"value": "100000.0"
+								},
+								{
+									"key": "city",
+									"value": "Skwierzyna"
+								},
+								{
+									"key": "street",
+									"value": "Konopnicka"
+								},
+								{
+									"key": "postal_code",
+									"value": "66-440"
+								},
+								{
+									"key": "country",
+									"value": "Polska"
+								},
+								{
+									"key": "house_number",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendane-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/attendance?id_employee=1&attendance_date=2021-12-31&time_at_work=8",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"attendance"
+							],
+							"query": [
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "attendance_date",
+									"value": "2021-12-31"
+								},
+								{
+									"key": "time_at_work",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/supplier?name_company=Zbąszyneks&nip=9999999999&email=zbąszyneks@sznio.pl&city=Zbąszynek&street=Knyszyńska&postal_code=69-420&country=Polska&house_number=111",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"supplier"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "Zbąszyneks"
+								},
+								{
+									"key": "nip",
+									"value": "9999999999"
+								},
+								{
+									"key": "email",
+									"value": "zbąszyneks@sznio.pl"
+								},
+								{
+									"key": "city",
+									"value": "Zbąszynek"
+								},
+								{
+									"key": "street",
+									"value": "Knyszyńska"
+								},
+								{
+									"key": "postal_code",
+									"value": "69-420"
+								},
+								{
+									"key": "country",
+									"value": "Polska"
+								},
+								{
+									"key": "house_number",
+									"value": "111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contractor-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/contractor?name_company=Knyszyneks&nip=1234567890&email=knyszyneks@gnio.pl&city=Knyszyn&street=Zbąszynecka&postal_code=22-333&country=Polska&house_number=224",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"contractor"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "Knyszyneks"
+								},
+								{
+									"key": "nip",
+									"value": "1234567890"
+								},
+								{
+									"key": "email",
+									"value": "knyszyneks@gnio.pl"
+								},
+								{
+									"key": "city",
+									"value": "Knyszyn"
+								},
+								{
+									"key": "street",
+									"value": "Zbąszynecka"
+								},
+								{
+									"key": "postal_code",
+									"value": "22-333"
+								},
+								{
+									"key": "country",
+									"value": "Polska"
+								},
+								{
+									"key": "house_number",
+									"value": "224"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "model-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/model",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"model"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/material?name_material=Brzoza&color=biały",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"material"
+							],
+							"query": [
+								{
+									"key": "name_material",
+									"value": "Brzoza"
+								},
+								{
+									"key": "color",
+									"value": "biały"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delivery-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/delivery?date_delivery=2021-10-11&id_employee=1&id_supplier=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"delivery"
+							],
+							"query": [
+								{
+									"key": "date_delivery",
+									"value": "2021-10-11"
+								},
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "id_supplier",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order_component-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/order_component?quantity=10&id_model=3&id_order=2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"order_component"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "10"
+								},
+								{
+									"key": "id_model",
+									"value": "3"
+								},
+								{
+									"key": "id_order",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stock-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/stock?quantity=100&name_material=Dąb&id_delivery=3",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"stock"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "100"
+								},
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "id_delivery",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order-insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/orders?date_order=2021-12-30&price=100.0&id_contractor=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "date_order",
+									"value": "2021-12-30"
+								},
+								{
+									"key": "price",
+									"value": "100.0"
+								},
+								{
+									"key": "id_contractor",
+									"value": "1"
+								},
+								{
+									"key": "date_finished",
+									"value": "2021-12-31",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "select",
+			"item": [
+				{
+					"name": "model-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/model?name_model=a",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"model"
+							],
+							"query": [
+								{
+									"key": "name_model",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "employee-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/employee",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"employee"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Stanisław",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "Zieliński",
+									"disabled": true
+								},
+								{
+									"key": "PESEL",
+									"value": "11223344550",
+									"disabled": true
+								},
+								{
+									"key": "date_employed",
+									"value": "2021-09-10",
+									"disabled": true
+								},
+								{
+									"key": "salary",
+									"value": "100000.0",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Skwierzyna",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Konopnicka",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "66-440",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "ols",
+									"disabled": true
+								},
+								{
+									"key": "house_number",
+									"value": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendance-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/attendance?id_employee=1&attendance_date=2021-12-31&time_at_work=8",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"attendance"
+							],
+							"query": [
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "attendance_date",
+									"value": "2021-12-31"
+								},
+								{
+									"key": "time_at_work",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/supplier?name_company=e",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"supplier"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "e"
+								},
+								{
+									"key": "nip",
+									"value": "9999999999",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "zbąszyneks@sznio.pl",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Zbąszynek",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Knyszyńska",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "69-420",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "Polska",
+									"disabled": true
+								},
+								{
+									"key": "house_number",
+									"value": "111",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contractor-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/contractor?country=Polska",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"contractor"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "Knyszyneks",
+									"disabled": true
+								},
+								{
+									"key": "nip",
+									"value": "1234567890",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "knyszyneks@gnio.pl",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Knyszyn",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Zbąszynecka",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "22-333",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "Polska"
+								},
+								{
+									"key": "house_number",
+									"value": "224",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/material?name_material=Dąb",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"material"
+							],
+							"query": [
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "color",
+									"value": "biały",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delivery-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/delivery?id_employee=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"delivery"
+							],
+							"query": [
+								{
+									"key": "date_delivery",
+									"value": "2021-10-11",
+									"disabled": true
+								},
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "id_supplier",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order_component-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/order_component?id_order=2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"order_component"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "id_model",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "id_order",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stock-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/stock?name_material=Dąb",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"stock"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "id_delivery",
+									"value": "3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/orders?id_contractor=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "date_order",
+									"value": "2021-12-30",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "100.0",
+									"disabled": true
+								},
+								{
+									"key": "id_contractor",
+									"value": "1"
+								},
+								{
+									"key": "date_finished",
+									"value": "2021-12-31",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "delete",
+			"item": [
+				{
+					"name": "model-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/model?name_model=a",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"model"
+							],
+							"query": [
+								{
+									"key": "name_model",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "employee-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/employee?first_name=a",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"employee"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "a"
+								},
+								{
+									"key": "last_name",
+									"value": "Zieliński",
+									"disabled": true
+								},
+								{
+									"key": "PESEL",
+									"value": "11223344550",
+									"disabled": true
+								},
+								{
+									"key": "date_employed",
+									"value": "2021-09-10",
+									"disabled": true
+								},
+								{
+									"key": "salary",
+									"value": "100000.0",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Skwierzyna",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Konopnicka",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "66-440",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "ols",
+									"disabled": true
+								},
+								{
+									"key": "house_number",
+									"value": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendance-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/attendance?id_employee=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"attendance"
+							],
+							"query": [
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "attendance_date",
+									"value": "2021-12-31",
+									"disabled": true
+								},
+								{
+									"key": "time_at_work",
+									"value": "8",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/supplier?name_company=e&house_number=111",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"supplier"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "e"
+								},
+								{
+									"key": "nip",
+									"value": "9999999999",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "zbąszyneks@sznio.pl",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Zbąszynek",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Knyszyńska",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "69-420",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "Polska",
+									"disabled": true
+								},
+								{
+									"key": "house_number",
+									"value": "111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contractor-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/contractor?name_company=Knyszyneks&nip=1234567890&email=knyszyneks@gnio.pl&city=Knyszyn&street=Zbąszynecka&postal_code=22-333&country=Polska&house_number=224",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"contractor"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "Knyszyneks"
+								},
+								{
+									"key": "nip",
+									"value": "1234567890"
+								},
+								{
+									"key": "email",
+									"value": "knyszyneks@gnio.pl"
+								},
+								{
+									"key": "city",
+									"value": "Knyszyn"
+								},
+								{
+									"key": "street",
+									"value": "Zbąszynecka"
+								},
+								{
+									"key": "postal_code",
+									"value": "22-333"
+								},
+								{
+									"key": "country",
+									"value": "Polska"
+								},
+								{
+									"key": "house_number",
+									"value": "224"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/material?name_material=Dąb",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"material"
+							],
+							"query": [
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "color",
+									"value": "biały",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delivery-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/delivery?id_employee=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"delivery"
+							],
+							"query": [
+								{
+									"key": "date_delivery",
+									"value": "2021-10-11",
+									"disabled": true
+								},
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "id_supplier",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order_component-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/order_component?id_order=2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"order_component"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "id_model",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "id_order",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stock-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/stock?name_material=Dąb",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"stock"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "id_delivery",
+									"value": "3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/orders?id_contractor=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "date_order",
+									"value": "2021-12-30",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "100.0",
+									"disabled": true
+								},
+								{
+									"key": "id_contractor",
+									"value": "1"
+								},
+								{
+									"key": "date_finished",
+									"value": "2021-12-31",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "update",
+			"item": [
+				{
+					"name": "model-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/model?name_model=a",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"model"
+							],
+							"query": [
+								{
+									"key": "name_model",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "employee-select",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/employee?first_name=Igor&last_name=Pawłowski&mod_first_name=Igorek&mod_last_name=THC",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"employee"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Igor"
+								},
+								{
+									"key": "last_name",
+									"value": "Pawłowski"
+								},
+								{
+									"key": "PESEL",
+									"value": "11223344550",
+									"disabled": true
+								},
+								{
+									"key": "date_employed",
+									"value": "2021-09-10",
+									"disabled": true
+								},
+								{
+									"key": "salary",
+									"value": "100000.0",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Skwierzyna",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Konopnicka",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "66-440",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "ols",
+									"disabled": true
+								},
+								{
+									"key": "house_number",
+									"value": "4",
+									"disabled": true
+								},
+								{
+									"key": "mod_first_name",
+									"value": "Igorek"
+								},
+								{
+									"key": "mod_last_name",
+									"value": "THC"
+								},
+								{
+									"key": "mod_PESEL",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_date_employed",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_salary",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_city",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_street",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_postal_code",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_country",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "mod_house_number",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendance-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/attendance?id_employee=1&attendance_date=2021-12-31&time_at_work=8",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"attendance"
+							],
+							"query": [
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "attendance_date",
+									"value": "2021-12-31"
+								},
+								{
+									"key": "time_at_work",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/supplier?name_company=e",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"supplier"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "e"
+								},
+								{
+									"key": "nip",
+									"value": "9999999999",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "zbąszyneks@sznio.pl",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Zbąszynek",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Knyszyńska",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "69-420",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "Polska",
+									"disabled": true
+								},
+								{
+									"key": "house_number",
+									"value": "111",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contractor-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/contractor?country=Polska",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"contractor"
+							],
+							"query": [
+								{
+									"key": "name_company",
+									"value": "Knyszyneks",
+									"disabled": true
+								},
+								{
+									"key": "nip",
+									"value": "1234567890",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "knyszyneks@gnio.pl",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Knyszyn",
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": "Zbąszynecka",
+									"disabled": true
+								},
+								{
+									"key": "postal_code",
+									"value": "22-333",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "Polska"
+								},
+								{
+									"key": "house_number",
+									"value": "224",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/material?name_material=Dąb",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"material"
+							],
+							"query": [
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "color",
+									"value": "biały",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delivery-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/delivery?id_employee=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"delivery"
+							],
+							"query": [
+								{
+									"key": "date_delivery",
+									"value": "2021-10-11",
+									"disabled": true
+								},
+								{
+									"key": "id_employee",
+									"value": "1"
+								},
+								{
+									"key": "id_supplier",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order_component-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/order_component?id_order=2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"order_component"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "id_model",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "id_order",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stock-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/stock?name_material=Dąb",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"stock"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "name_material",
+									"value": "Dąb"
+								},
+								{
+									"key": "id_delivery",
+									"value": "3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order-select",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:5000/orders?id_contractor=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "date_order",
+									"value": "2021-12-30",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "100.0",
+									"disabled": true
+								},
+								{
+									"key": "id_contractor",
+									"value": "1"
+								},
+								{
+									"key": "date_finished",
+									"value": "2021-12-31",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
