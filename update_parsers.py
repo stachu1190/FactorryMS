@@ -5,7 +5,7 @@ def employee_parser():
     parser.add_argument("id_employee", type=int, required=False)
     parser.add_argument("first_name", type=str, help="First name of the employee", required=False)
     parser.add_argument("last_name", type=str, help="Last name of the employee", required=False)
-    parser.add_argument("PESEL", type=str, help="Employee PESEL", required=False)
+    parser.add_argument("pesel", type=str, help="Employee PESEL", required=False)
     parser.add_argument("date_employed", type=str, help="Date in format YYYY-MM-DD", required=False)
     parser.add_argument("salary", type=float, help="Employee salary as float", required=False)
     parser.add_argument("city", type=str, help="City name", required=False)
@@ -147,6 +147,12 @@ def stock_parser():
     parser.add_argument("mod_name_material", type=str, help="Name of the material", required=False)
     parser.add_argument("mod_id_delivery", type=int, help="ID of the delivery in which the stock was registered", required=False)
     return parser
+def raise_parser():
+    parser = reqparse.RequestParser()
+    parser.add_argument("pesel", type=str, required=False)
+    parser.add_argument("amount", type=float, required=False)
+    return parser
+
 
 
 

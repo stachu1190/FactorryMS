@@ -4,7 +4,7 @@ def employee_parser():
     parser = reqparse.RequestParser()
     parser.add_argument("first_name", type=str, help="First name of the employee", required=True)
     parser.add_argument("last_name", type=str, help="Last name of the employee", required=True)
-    parser.add_argument("PESEL", type=str, help="Employee PESEL", required=True)
+    parser.add_argument("pesel", type=str, help="Employee PESEL", required=True)
     parser.add_argument("date_employed", type=str, help="Date in format YYYY-MM-DD", required=True)
     parser.add_argument("salary", type=float, help="Employee salary as float", required=True)
     parser.add_argument("city", type=str, help="City name", required=True)

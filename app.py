@@ -15,6 +15,7 @@ def date_splitter(s):
     tab = s.split('-')
     return datetime.date(int(tab[0]), int(tab[1]), int(tab[2]))   
 def select(args, table):
+    cursor_select = connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
     if(any(args.values()) == False):
         query = "SELECT * FROM " + table
     else:
@@ -35,6 +36,7 @@ def select(args, table):
                 first = False
     cursor_select.execute(query)
     response = cursor_select.fetchall()
+    cursor_select.close()
     if response == []:
         return response, 404
     for i in range(len(response)):
@@ -149,7 +151,6 @@ try:
                                   database="coffin_factory")
 
     cursor = connection.cursor()
-    cursor_select = connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)
@@ -513,6 +514,29 @@ class Orders(Resource):
         code = update(args, "orders")
         connection.commit()
         return {}, code
+class Raise(Resource):
+    def put(self):
+        parser = update_parsers.raise_parser()
+        args = parser.parse_args()
+        query = "call giveRaise({pesel},{amount})".format(pesel = args['pesel'], amount = args['amount'])
+        try:
+            cursor.execute(query)
+            return 200
+        except (Exception, Error) as error:
+            connection.rollback()
+            code, error = print_psycopg2_exception(err)
+            return 404
+class Salaries(Resource):
+    def get(self):
+        cursor_select = connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+        query = "call giveRaise({pesel},{amount})"
+        cursor_select.execute(query)
+        response = cursor_select.fetchall()
+        cursor_select.close()
+        if response == []:
+            return response, 404
+        else:
+            return response, 200
 
 api.add_resource(Employee, "/employee")
 api.add_resource(Attendance, "/attendance")
@@ -524,6 +548,8 @@ api.add_resource(Delivery, "/delivery")
 api.add_resource(Order_component, "/order_component")
 api.add_resource(Stock, "/stock")
 api.add_resource(Orders, "/orders")
+api.add_resource(Raise, "/raise")
+api.add_resource(Salaries, "/salaries")
 
 if __name__ == "__main__":
 	app.run(debug=True)
